@@ -5,21 +5,21 @@ public class Exam {
     private double vote;
     private Course course;
 
-    public Exam(String title, double vote, Course course){
+    public Exam(String title, double vote, Course course) {
         this.title = title;
         this.vote = vote;
         this.course = course;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 
-    public double getVote(){
+    public double getVote() {
         return vote;
     }
 
-    public int getCourseId(){
+    public int getCourseId() {
         return course.getId();
     }
 }

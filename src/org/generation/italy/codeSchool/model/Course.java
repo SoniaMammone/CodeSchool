@@ -10,7 +10,7 @@ public class Course {
     private ArrayList<Student> students;
     private static int idGenerator = 1;
 
-    public Course(String title, Area area, DifficultyLevel difficultyLevel){
+    public Course(String title, Area area, DifficultyLevel difficultyLevel) {
         this.id = idGenerator++;
         this.title = title;
         this.area = area;
@@ -18,21 +18,21 @@ public class Course {
         this.students = new ArrayList<>();
     }
 
-    public ArrayList<Student> listStudents(){
+    public ArrayList<Student> listStudents() {
         return students;
     }
 
-    public int enroll(Student s){
+    public int enroll(Student s) {
         students.add(s);
         return students.size();
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public String toString(){
+    public String toString() {
         return String.format("ID: %d, Titolo: %s, Area: %s, Livello difficoltà: %s", id, title, area, difficultyLevel);
     }
-    
+
 }

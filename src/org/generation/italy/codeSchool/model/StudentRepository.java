@@ -13,7 +13,7 @@ public class StudentRepository {
         students.put(student2.getId(), student2);
     }
 
-    public Student findById(int id){
+    public Student findById(int id) {
         return students.get(id);
     }
 
