@@ -108,7 +108,7 @@ public class UserInterface {
     private void addNewCourse(){
         Course c = createCourse();
                     courseRepo.save(c);
-                    System.out.printf("Corso inserito con id %d", c.getId());
+                    System.out.printf("Corso inserito con id %d%n", c.getId() + 1);
     }
 
     private String inserStudentName(){
@@ -171,13 +171,19 @@ public class UserInterface {
         }
     }
 
+    private void printLevelNames(){
+        for (String line : DifficultyLevel.getLevelNames()){
+            System.out.println(line);
+        }
+    }
+
     private  DifficultyLevel insertDifficultyLevel() {
 
         boolean isFound = false;
         DifficultyLevel level= null;
         int numLevel;
         do{
-            DifficultyLevel.getLevelNames();
+            printLevelNames();
             System.out.println("Inserisci l'area della difficoltà:");
             numLevel = console.nextInt();
             console.nextLine();
@@ -188,7 +194,7 @@ public class UserInterface {
                     level = DifficultyLevel.values()[i];
                 }
             }
-            System.out.printf("Hai scelto: %s", level.toString());//controllo inserimento
+            System.out.printf("Hai scelto: %s%n", level.toString());//controllo inserimento
             System.out.println();
 
         }while(!isFound);
