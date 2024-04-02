@@ -8,7 +8,7 @@ public class Student {
     private String name;
     private String lastname;
     private ArrayList<Exam> transcript;
-    private ArrayList<Course> courses;
+    private ArrayList<Course> courses; //arrayList di reference dei corsi
     private static int idGenerator = 1;
 
     public Student(String name, String lastname) {

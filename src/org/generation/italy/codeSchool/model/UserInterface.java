@@ -29,13 +29,13 @@ public class UserInterface {
                     addNewCourse();
                     break;
                 case 3:
-                    returnStudentsForCourse();
+                    getStudentsForCourse();
                     break;
                 case 4:
                     addStudentToCourse();
                     break;
                 case 5:
-                    returnRavarageForCourse();
+                    getRavarageForCourse();
                     break;
                 default:
                     System.out.println("Comando non valido!");
@@ -59,7 +59,7 @@ public class UserInterface {
                 Inserisci scelta:""");
     }
 
-    private void returnRavarageForCourse() {
+    private void getRavarageForCourse() {
         System.out.print("Inserisci l'ID di uno studente: ");
         int idS = console.nextInt();
         console.nextLine();
@@ -92,7 +92,7 @@ public class UserInterface {
         }
     }
 
-    private void returnStudentsForCourse() {
+    private void getStudentsForCourse() {
         // creare un metodo
         System.out.print("Inserisci l'ID del corso: ");
         int id = console.nextInt();
