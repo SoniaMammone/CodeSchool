@@ -9,6 +9,7 @@ import org.generation.italy.codeSchool.model.UserInterface;
 
 public class Start {
 
+    //blocco statico per provare il programma
     static{
         StudentRepository studentRepo = new StudentRepository();
         CourseRepository courseRepo = new CourseRepository();

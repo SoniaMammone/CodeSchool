@@ -12,6 +12,7 @@ public enum Area {
         //ordinal dice la posizione dell'enum partendo da 
     }
 
+    //lo switch ritorna un valore
     /*public Area findAreaByCode(int code){
         return switch(code){
             case 1 -> CODING;

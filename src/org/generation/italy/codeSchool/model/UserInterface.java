@@ -25,53 +25,16 @@ public class UserInterface {
                     printCourseList();
                     break;
                 case 2:
-                    Course c = createCourse();
-                    courseRepo.save(c);
-                    System.out.printf("Corso inserito con id %d", c.getId());
+                    addNewCourse();
                     break;
                 case 3:
-                    //creare un metodo
-                    System.out.print("Inserisci l'ID del corso: ");
-                    int id = console.nextInt();
-                    console.nextLine(); //altrimenti si mangia il return(Invio)
-                    Course courseFound = courseRepo.getCourse(id);
-                    if(courseFound != null){
-                        for(Student s : courseFound.listStudents()){
-                            System.out.println(s);
-                        }
-                    }else{
-                        System.out.println("Questo corso non esiste.");
-                    }
+                    returnStudentsForCourse();
                     break;
                 case 4:
-                    System.out.print("Inserisci l'ID del corso: ");
-                    int idCourse = console.nextInt();
-                    console.nextLine(); //altrimenti si mangia il return(Invio)
-                    Course found = courseRepo.getCourse(idCourse);
-                    System.out.print("Inserisci l'ID di uno studente: ");
-                    int idStudent = console.nextInt();
-                    console.nextLine();
-                    Student st1 = studentRepo.findById(idStudent);
-                    if(found != null && st1 != null){
-                        found.enroll(st1);
-                        st1.addCourse(found);
-                        System.out.println("Lo studente è stato aggiunto al corso!");
-                    }else{
-                        System.out.println("Questo corso o lo studente non esistono.");
-                    }
+                    addStudentToCourse();
                     break;
                 case 5:
-                    System.out.print("Inserisci l'ID di uno studente: ");
-                    int idS = console.nextInt();
-                    console.nextLine();
-                    Student st2 = studentRepo.findById(idS);
-                    System.out.print("Inserisci l'ID del corso: ");
-                    int idC = console.nextInt();
-                    console.nextLine();
-                    Course c2 = courseRepo.getCourse(idC);
-                    if(st2 != null && c2 != null){
-                        System.out.printf("La media dei voti dello studente %s per il corso con ID %d è %.2f%n", st2.toString(), idC, st2.calculateAverageForCourse(idC));
-                    }
+                    returnRavarageForCourse();
                     break;
                 default:
                     System.out.println("Comando non valido!");
@@ -93,6 +56,59 @@ public class UserInterface {
             5)Media voti Studente per corso
 
             Inserisci scelta:""");
+    }
+
+    private void returnRavarageForCourse(){
+        System.out.print("Inserisci l'ID di uno studente: ");
+                    int idS = console.nextInt();
+                    console.nextLine();
+                    Student st2 = studentRepo.findById(idS);
+                    System.out.print("Inserisci l'ID del corso: ");
+                    int idC = console.nextInt();
+                    console.nextLine();
+                    Course c2 = courseRepo.getCourse(idC);
+                    if(st2 != null && c2 != null){
+                        System.out.printf("La media dei voti dello studente %s per il corso con ID %d è %.2f%n", st2.toString(), idC, st2.calculateAverageForCourse(idC));
+                    }
+    }
+
+    private void addStudentToCourse(){
+        System.out.print("Inserisci l'ID del corso: ");
+                    int idCourse = console.nextInt();
+                    console.nextLine(); //altrimenti si mangia il return(Invio)
+                    Course found = courseRepo.getCourse(idCourse);
+                    System.out.print("Inserisci l'ID di uno studente: ");
+                    int idStudent = console.nextInt();
+                    console.nextLine();
+                    Student st1 = studentRepo.findById(idStudent);
+                    if(found != null && st1 != null){
+                        found.enroll(st1);
+                        st1.addCourse(found);
+                        System.out.println("Lo studente è stato aggiunto al corso!");
+                    }else{
+                        System.out.println("Questo corso o lo studente non esistono.");
+                    }
+    }
+
+    private void returnStudentsForCourse(){
+        //creare un metodo
+        System.out.print("Inserisci l'ID del corso: ");
+        int id = console.nextInt();
+        console.nextLine(); //altrimenti si mangia il return(Invio)
+        Course courseFound = courseRepo.getCourse(id);
+        if(courseFound != null){
+            for(Student s : courseFound.listStudents()){
+                System.out.println(s);
+            }
+        }else{
+            System.out.println("Questo corso non esiste.");
+        }
+    }
+
+    private void addNewCourse(){
+        Course c = createCourse();
+                    courseRepo.save(c);
+                    System.out.printf("Corso inserito con id %d", c.getId());
     }
 
     private String inserStudentName(){
@@ -161,7 +177,7 @@ public class UserInterface {
         DifficultyLevel level= null;
         int numLevel;
         do{
-            DifficultyLevel.printDifficultyLevel();
+            DifficultyLevel.getLevelNames();
             System.out.println("Inserisci l'area della difficoltà:");
             numLevel = console.nextInt();
             console.nextLine();
