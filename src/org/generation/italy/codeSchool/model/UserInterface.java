@@ -18,29 +18,17 @@ public class UserInterface {
             printMenu();
             choice = console.nextInt();
             console.nextLine();
+
             switch (choice) {
-                case 0:
-                    System.out.println("Grazie per aver utilizzato il nostro programma, Arrivederci");
-                    break;
-                case 1:
-                    printCourseList();
-                    break;
-                case 2:
-                    addNewCourse();
-                    break;
-                case 3:
-                    getStudentsForCourse();
-                    break;
-                case 4:
-                    addStudentToCourse();
-                    break;
-                case 5:
-                    getRavarageForCourse();
-                    break;
-                default:
-                    System.out.println("Comando non valido!");
-                    break;
+                case 0 -> System.out.println("Grazie per aver utilizzato il nostro programma, Arrivederci");
+                case 1 -> printCourseList();
+                case 2 -> addNewCourse();
+                case 3 -> getStudentsForCourse();
+                case 4 -> addStudentToCourse();
+                case 5 -> getRavarageForCourse();
+                default -> System.out.println("Comando non valido!");
             }
+
         } while (choice != 0);
         console.close();
         return choice;
@@ -53,7 +41,7 @@ public class UserInterface {
                 1)Lista corsi
                 2)Crea nuovo corso
                 3)Lista studenti iscritti per corso
-                4)Iscrivere nuovo studente a un corso
+                4)Iscrivere studente a un corso
                 5)Media voti Studente per corso
 
                 Inserisci scelta:""");
