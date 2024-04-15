@@ -55,10 +55,10 @@ public class FileStudentRepository implements AbstractStudentRepository{
         //qui il finally non serve perchè le risorse verranno automaticamente chiuse 
         //nelle tonde posso metterci solo instazazioni degli oggetti, anche più di uno separati dal ;
         //funziona solo conoggetti che implementano l'interfaccia AutoCloseable
-        try(BufferedReader br = new BufferedReader(new FileReader("nonesisto.txt"));){
+        try(BufferedReader br = new BufferedReader(new FileReader(Configuration.fileName));){
             //leggere file un carattere alla volta // legge i caratteri riga per riga fino al capo
-            // String line = br.readLine();
-            // System.out.println(line.length());
+            String line = br.readLine();
+            System.out.println(line.length());
             //la riga sotto è per vedere un altro tipo di eccezione
             Class x = Class.forName("org.generation.italy.codeSchool.model.Areea");
             return null;

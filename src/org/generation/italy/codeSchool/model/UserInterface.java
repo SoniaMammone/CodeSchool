@@ -38,7 +38,7 @@ public class UserInterface {
 
             } catch (IOException e){
                 //fa vedere il percorso che ha portato all'eccezione
-                //e.printStackTrace();
+                e.printStackTrace();
                 System.out.println("Il file con i dati dello studente non esiste.");
                 System.out.print("Inserire il nome di un nuovo file oppure exit per terminare: ");
                 String answer = console.nextLine();
@@ -49,6 +49,10 @@ public class UserInterface {
                 Configuration.fileName = "esisto.txt";
                 studentRepo = new FileStudentRepository(Configuration.fileName);
                 System.out.println("Ritentando con il nuovo file " +  Configuration.fileName);
+            } catch (EntityAlreadyExistsException e){
+                System.out.println(e.getMessage());
+                System.out.printf("Non possiamo inserire il %s perchè il suo id %d è già registrato. Riprova con un nuovo id",
+                 e.getClassName(), e.getId());
             }
             
 
@@ -128,7 +132,7 @@ public class UserInterface {
         }
     }
 
-    private void addNewCourse() {
+    private void addNewCourse() throws EntityAlreadyExistsException{
         Course c = createCourse();
         courseRepo.save(c);
         System.out.printf("Corso inserito con id %d%n", c.getId() + 1);

@@ -2,7 +2,7 @@ package org.generation.italy.codeSchool.model;
 
 import java.util.ArrayList;
 
-public class Course {
+public class Course implements Comparable<Course>{
     private int id;
     private String title;
     private Area area;
@@ -33,6 +33,11 @@ public class Course {
 
     public String toString() {
         return String.format("ID: %d, Titolo: %s, Area: %s, Livello difficoltà: %s", id, title, area, difficultyLevel);
+    }
+
+    @Override
+    public int compareTo(Course o) {
+        return this.title.compareTo(o.title);
     }
 
 }
