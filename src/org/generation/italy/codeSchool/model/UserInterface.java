@@ -1,16 +1,20 @@
 package org.generation.italy.codeSchool.model;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
     // Integer + la versione ad oggetti della primitiva int perchè nelle generics
     // non possiamo usare le primitive
-    private StudentRepository studentRepo = new StudentRepository();
+    // private StudentRepository studentRepo = new StudentRepository();
+    private FileStudentRepository studentRepo = new FileStudentRepository(Configuration.fileName);
     private CourseRepository courseRepo = new CourseRepository();
     private Scanner console = new Scanner(System.in);
 
-    public int doMenu() {
+    //sta gestendo 2 eccezioni e rilanciando 1
+    public int doMenu() throws ClassNotFoundException {
 
         int choice;
 
@@ -19,15 +23,34 @@ public class UserInterface {
             choice = console.nextInt();
             console.nextLine();
 
-            switch (choice) {
-                case 0 -> System.out.println("Grazie per aver utilizzato il nostro programma, Arrivederci");
-                case 1 -> printCourseList();
-                case 2 -> addNewCourse();
-                case 3 -> getStudentsForCourse();
-                case 4 -> addStudentToCourse();
-                case 5 -> getRavarageForCourse();
-                default -> System.out.println("Comando non valido!");
+            try{
+
+                switch (choice) {
+                    case 0 -> System.out.println("Grazie per aver utilizzato il nostro programma, Arrivederci");
+                    case 1 -> printCourseList();
+                    case 2 -> addNewCourse();
+                    case 3 -> getStudentsForCourse();
+                    case 4 -> addStudentToCourse();
+                    case 5 -> getAvarageForCourse();
+                    case 6 -> printStudentById();
+                    default -> System.out.println("Comando non valido!");
+                }
+
+            } catch (IOException e){
+                //fa vedere il percorso che ha portato all'eccezione
+                //e.printStackTrace();
+                System.out.println("Il file con i dati dello studente non esiste.");
+                System.out.print("Inserire il nome di un nuovo file oppure exit per terminare: ");
+                String answer = console.nextLine();
+                if (answer.equals("exit")){
+                    System.out.println("Terminando il programma.");
+                    return -1;
+                }
+                Configuration.fileName = "esisto.txt";
+                studentRepo = new FileStudentRepository(Configuration.fileName);
+                System.out.println("Ritentando con il nuovo file " +  Configuration.fileName);
             }
+            
 
         } while (choice != 0);
         console.close();
@@ -43,11 +66,21 @@ public class UserInterface {
                 3)Lista studenti iscritti per corso
                 4)Iscrivere studente a un corso
                 5)Media voti Studente per corso
+                6)Stampa i dati di uno studente
 
                 Inserisci scelta:""");
     }
 
-    private void getRavarageForCourse() {
+    private void printStudentById() throws FileNotFoundException, ClassNotFoundException, IOException {
+        System.out.print("Inserisci l'id dello studente: ");
+        int idS = console.nextInt();
+        console.nextLine();
+        Student s = studentRepo.findById(idS);
+        System.out.println(s);
+    }
+
+
+    private void getAvarageForCourse() throws FileNotFoundException, ClassNotFoundException, IOException {
         System.out.print("Inserisci l'ID di uno studente: ");
         int idS = console.nextInt();
         console.nextLine();
@@ -62,7 +95,7 @@ public class UserInterface {
         }
     }
 
-    private void addStudentToCourse() {
+    private void addStudentToCourse() throws FileNotFoundException, ClassNotFoundException, IOException {
         System.out.print("Inserisci l'ID del corso: ");
         int idCourse = console.nextInt();
         console.nextLine(); // altrimenti si mangia il return(Invio)

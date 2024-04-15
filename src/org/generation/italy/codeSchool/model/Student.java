@@ -48,8 +48,34 @@ public class Student {
         return sum / count;
     }
 
+    @Override
+    public boolean equals(Object o){
+        System.out.println("Chiamato equals");
+        if(o == null){
+            return false;
+        }
+        if(this.getClass() != o.getClass()){
+            return false;
+        }
+        // if(o instanceof Student){ //ritrna true se o è sia uno studente sia una classe figlia
+        //     Student x = (Student) o;
+        // }
+        Student other = (Student) o; //casting dell'object o al tipo student
+        return this.id == other.id;
+    }
+
+    @Override
+    public int hashCode(){
+        System.out.println("Chiamato hashCode");
+        return id;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
     public String toString() {

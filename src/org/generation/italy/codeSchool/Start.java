@@ -1,5 +1,8 @@
 package org.generation.italy.codeSchool;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.generation.italy.codeSchool.model.Course;
 import org.generation.italy.codeSchool.model.CourseRepository;
 import org.generation.italy.codeSchool.model.Exam;
@@ -37,9 +40,32 @@ public class Start {
         // studente ha in quel corso
 
         // Stampa la lista dei corsi
-        UserInterface u = new UserInterface();
+         UserInterface u = new UserInterface();
 
-        u.doMenu();
+         try {
+            u.doMenu();
+        } catch (ClassNotFoundException e) {
+            System.out.println("ERRORE nella configurazione del sistema, contattare Sonia, grazie.");
+        }
+
+        // Student student1 = new Student("Giulio", "Zalone");
+        // Student student2 = new Student("Giulio", "Zalone");
+        // //Student student3 = student2; //copia l'indirizzo
+
+        // student1.setId(20);
+        // student2.setId(20);
+
+        // Set<Student> hs = new HashSet<>();
+
+        // System.out.println(student1.hashCode());
+        // System.out.println(student2.hashCode());
+
+        // hs.add(student1);
+        // hs.add(student2);
+        // //hs.add(student3);
+
+        // //System.out.println(student1.equals(student2)); //controlla gli inderizzi dei due oggetti
+        // System.out.println(hs.size());
     }
 
 }
